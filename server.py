@@ -10,6 +10,9 @@ def sent_detector():
     response = emotion_detector(text_to_analyze)
 
     dominant_emotion = response.pop('dominant_emotion')
+    if dominant_emotion is None:
+        return "Invalid text! Please try again!."
+
     response_str = ", ".join(f"'{k}': {v}" for k, v in response.items())
 
     return f'For the given statement, the system response is {response_str}. The dominant emotion is {dominant_emotion}.'
@@ -20,4 +23,4 @@ def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5002)
+    app.run(host="0.0.0.0", port=5001)
